@@ -1,0 +1,40 @@
+var path = require("path");
+module.exports = {
+	entry:{
+		index:'./src/index.js'
+	},
+	output:{
+		path:path.resolve(__dirname,'build'),
+		filename:'[name].bundle.js'
+	},
+	module:{
+		loaders:[
+			{
+				test:/\.js[x]?$/,
+				loader:'babel',
+				query:{
+					presets:['react','es2015']
+				}
+			},
+			{
+				test:/\.css$/,
+				loader:'style!css'
+			},
+			{
+				test:/\.less$/,
+				loader:'style!css!less'
+			},
+			{
+				test:/\.(png|jpg|gif)$/,
+				loader:'url?limit=8192'
+			}
+		]
+	},
+	devServer:{
+		historyApiFallback:true,
+		hot:true,
+		inline:true,
+		progress:true,
+		port:6060
+	}
+}
